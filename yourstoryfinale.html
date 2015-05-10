@@ -1,0 +1,428 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Test - Your Story One Page</title>
+<meta name="viewport" content="width=device-width, user-scalable=no">
+<!--commento condizionale per Internet explorer in versione inferiore al 9: importiamo due librerie js necessarie a convertire l'html 5 in quelle versioni-->
+<!--[if lt IE 9]>
+<script src="js/html5shiv.js"></script>
+<script src="js/css3-mediaqueries.js"></script>
+<![end if]-->
+
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" type="text/css" href="css/ys.css">
+<link rel="stylesheet" type="text/css" href="css/overlay.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="js/modernizr.custom.js"></script>
+<script type="text/javascript">
+$(document).ready(function(e) {
+	/*---Fixed menu quando arriva al top---*/
+	$(window).scroll(function(e) {
+	if($(window).scrollTop() >= $("#intro").innerHeight()){
+         $("#nav-back").removeClass("nav-bottom");
+		  $("#nav-back").addClass("nav-top")
+         }
+	else{
+		$("#nav-back").removeClass("nav-top");
+		$("#nav-back").addClass("nav-bottom")
+		}
+	/*---Fine fixed menu quando arriva al top---*/
+	/*---FadeIn pulsante scrollTop---*/
+		if($(document).scrollTop() > 1000){
+			$("#scrollTop").fadeIn(500);
+		}
+		else {
+			$("#scrollTop").fadeOut(100);
+		}
+    });
+	/*---Fine window scroll--*/
+	
+	/* Responsive menu*/
+    $('.toggle-nav').click(function(e) {
+       $(this).toggleClass('active');
+        $('.menu ul').toggleClass('active');
+        e.preventDefault();
+    });
+
+	/*---Funzionamento pulsante Scroll Top---*/
+	$("#scrollTop").click(function(e) {
+		$("html body").animate({ 
+			scrollTop: $("#slogan-back").offset().top
+			}, 1000);
+		e.preventDefault();
+    });
+	/*animazione del menu*/
+	$("nav ul li a").stop().click(function(e) {
+		var idDaraggiungere = $(this).attr("href"); 
+		$("html body").animate({ 
+			scrollTop: $(idDaraggiungere).offset().top -60
+			}, 1000);
+		$('nav ul').toggleClass('active');
+		e.preventDefault();
+    });
+
+	/*--Accordion eventi--*/
+	$(".event-item").click(function(e) {
+		e.preventDefault();
+        if($(this).hasClass("selected")){
+			$(this).removeClass("selected");
+			$(this).next().hide(600);
+			}
+		else if ($(window).width() < 479){
+			$(".event-item").removeClass("selected");
+		}
+		else{
+			$(".event-item").removeClass("selected");
+			$(".content-event").hide(600);
+			$(this).addClass("selected");
+			$(this).next().show(500);
+			}
+    });
+	
+	$(window).resize(function(e) {
+		if($(".event-item").hasClass("selected") && ($(window).width() <= 479)){
+			$(".event-item").removeClass("selected");
+			$(".content-event").hide(600);
+			}
+    });
+})
+</script>
+</head>
+
+<body>
+<!--SEZIONE INTRO-->
+<div id="slogan-back">
+  <h3 class="nexa"> No matter if you're good or bad... It's only </h3>
+</div>
+<section id="intro"> <!--<img src="immagini/intro2.jpg"> --> 
+  <!--<div id="address">
+<h1>Calle Mayor, 6 <br>
+- Madrid - </h1>
+</div>
+-->
+  <div id="nav-back" class="nav-bottom">
+    <nav class="menu">
+      <ul class="active">
+        <li><a href="#about">Chi siamo</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#events">Eventi</a></li>
+        <li><a href="#contatti">Contatti</a></li>
+      </ul>
+      <a class="toggle-nav" href="#">&#9776;</a> </nav>
+  </div>
+</section>
+<div id="scrollTop"></div>
+<!--SEZIONE about-->
+<section class="parallax about"> </section>
+<div class="about-back">
+  <div id="about"></div>
+  <div id="about-container">
+    <div id="about-text">
+      <h1>Chi siamo</h1>
+      Immagina un posto in cui sederti, <br>
+      scegliere il tuo <span class="bold verde">caffè</span> preferito, <br>
+      accompagnarlo con il sorriso di un amico <br>
+      e con una tavoletta di <span class="bold verde">cioccolato</span>.
+      <hr>
+      E lì, comunque sia andata la tua giornata, <br>
+      comincia <span class="bold salmone">"Your Story"</span>.
+      <hr>
+      <button id="over-about" type="button">Scopri di più</button>
+    </div>
+  </div>
+</div>
+<div id="about-photo"> </div>
+<div class="clear-float"></div>
+<!--SEZIONE menu-->
+<section class="parallax par-menu"> </section>
+<div class="menu-back">
+  <div id="menu-photo"></div>
+  <div id="menu-container">
+    <div id="menu"></div>
+    <h1>Il menu</h1>
+    <p> Per iniziare bene la giornata scegli un buon <span class="bold salmone">caffè</span> </p>
+    <p>Per continuarla, la carica del <span class="bold verde">cioccolato</span></p>
+    <div class="wrapper" id="show-menu">
+      <div class="box">
+        <p><img src="immagini/menu/choco.png" width="250" height="156" alt=""/> </p>
+        <button id="over-choco" type="button">Choco menu</button>
+      </div>
+      <div class="box">
+        <p><img src="immagini/menu/coffee.png" width="250" height="156" alt=""/></p>
+        <button id="over-coffee" type="button">Coffee menu</button>
+      </div>
+      <div class="box">
+        <p><img src="immagini/menu/espresso.png" width="250" height="156" alt=""/></p>
+        <button id="over-espresso" type="button">Espresso menu</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--SEZIONE eventi-->
+<section class="parallax eventi"> </section>
+<div id="event-back">
+  <div id="events"></div>
+  <div id="event-container">
+    <h1> I nostri eventi</h1>
+    <div class="event-item">
+      <h3 class="band"> <span class="band-date bordeaux">22 mar 15, ore 21.30</span> NUOVALCHIMIA</h3>
+      <div class="event-date">
+        <h3>22<br>
+          <span class="h3_little">MAR 15 21.30</span></h3>
+      </div>
+      <div class="event-img" id="event-01"> </div>
+      <div class="event-description">
+        <div class="description-item">
+          <h3> NUOVALCHIMIA</h3>
+          <p> Vivi il sound di matrice alternative-rock americana della band pugliese </p>
+        </div>
+      </div>
+    </div>
+    <div class="content-event">
+      <div class="event-photo"> <img src="immagini/eventi/giorgio2.jpg"/> </div>
+      <div class="content-description">
+        <p>I NuovalchimiA sono una band indipendente. A fine Aprile i NuovalchimiA pubblicano il loro primo album "TRASMUTAZIONI" (Registrato c/o Studio-Z Roma) composto da otto tracce inedite, prodotto, scritto e arrangiato interamente dalla band. Oltre a brani completamente nuovi sono incluse canzoni che fanno parte da tempo del repertorio live del gruppo e che vedono finalmente la luce in questo lavoro d'esordio. I NuovalchimiA presentano il disco in anteprima in terra pugliese (Groove live club - Foggia). La band pubblica il videoclip di "Brain drain", brano di forte impatto rock che affronta l'attualissimo tema dei cervelli in fuga. </p>
+      </div>
+    </div>
+    <div class="event-item">
+      <h3 class="band"><span class="band-date bordeaux">10 apr 15, ore 21.30</span> SANTA MARGARET</h3>
+      <div class="event-date">
+        <h3>10<br>
+          <span class="h3_little">APR 15 21.30</span></h3>
+      </div>
+      <div class="event-img" id="event-02"> </div>
+      <div class="event-description">
+        <div class="description-item">
+          <h3> SANTA MARGARET</h3>
+          <p> Dove la tradizione si mescola con la trasgressione, il sacro con il profano </p>
+        </div>
+      </div>
+    </div>
+    <div class="content-event">
+      <div class="event-photo"> <img src="immagini/eventi/eventi2_2.jpg"/> </div>
+      <div class="content-description">
+        <p>Negli ultimi due anni i Santa Margaret si sono dedicati alla composizione di brani originali, chiamando a se amici e musicisti di lunga esperienza nella scena milanese, come Marco Cucuzzella alla batteria, Leonardo Angelicchio alle tastiere e Ivo Barbieri al basso, per dare vita ad un sound che affonda le sue radici nel blues e nel rock, per poi perdersi in sonorità più psichedeliche, e ritrovare infine la strada di casa con melodie tipiche della canzone d’autore italiana degli anni ’60.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--MAPPA GOOGLE-->
+<section class="parallax mappa"> </section>
+<div class="contact-back">
+  <div id="contatti"></div>
+  <div id="form-container">
+    <div id="form-text">
+      <h1>Contatti</h1>
+    </div>
+    <form>
+      <input type="text" class="ys_form" placeholder="Nome">
+      <input type="email" class="ys_form" placeholder="E-mail">
+      <textarea class="ys_form" placeholder="Scrivi qui il tuo messaggio"></textarea>
+      <input type="submit" placeholder="INVIA">
+    </form>
+    <div id="social"> <a href="#" class="socialIcon" id="twitter">&nbsp;</a><a href="#" class="socialIcon" id="googleplus">&nbsp;</a><a href="#" class="socialIcon" id="instagram">&nbsp;</a><a href="#" class="socialIcon" id="facebook">&nbsp;</a> </div>
+  </div>
+</div>
+<div id="map">
+  <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3037.656454680831!2d-3.7056865999999995!3d40.416460799999996!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42287ef4966d93%3A0x305b9befb9535f89!2sCalle+Mayor%2C+6%2C+28013+Madrid%2C+Spagna!5e0!3m2!1sit!2sit!4v1426458646246" width="100%" height="650" frameborder="0" style="border:0"></iframe>
+</div>
+<div class="clear-float"></div>
+<!--FOOTER-->
+<div id="footer-back">
+  <div id="footer">
+    <div id="footer-address">
+      <h1>© 2015 Claudia Di Dio - Ilas Web Design</h1>
+    </div>
+    <div id="footer-credit">
+      <h1>TEL: 012 345678 | EMAIL: info@yourstory.COM <br>
+        Calle Mayor, 6 - MADRID</h1>
+    </div>
+    <div id="logo-footer"><a href="#intro"><img src="immagini/logo_50X50.png" ></a></div>
+  </div>
+</div>
+
+<!--OVERLAY ABOUT: contenuti-->
+<div class="overlay overlay-scale" id="chisiamo">
+  <button type="button" class="overlay-close"></button>
+  <div class="overlay-container-text">
+    <div class="overlay-content">
+      <h1>La nostra mission</h1>
+      Uno sbadiglio è un urlo silenzioso che invoca il caffè.
+      <hr>
+      Comincia la tua giornata con un <span class="bold salmone">espresso</span>,<br>
+      ricaricati poi con un <span class="bold verde">americano</span> a mezza mattinata.
+      <hr>
+      Tutti devono credere in qualcosa. Io credo che mi farò un altro caffè.
+      <hr>
+      Alle 17 scatta il <span class="bold salmone">choco-time</span>: <br>
+      da solo o in compagnia, il nostro cioccolato aspetta solo te. <br>
+      E per concludere la giornata, non perderti i nostri <span class="bold verde">eventi</span>.
+      <hr>
+      Our story is... Your story. </div>
+    <div class="overlay-photo"> <img src="immagini/mission.jpg" width="1500" height="1000" alt=""/> </div>
+  </div>
+</div>
+<!--fine OVERLAY ABOUT: contenuti--> 
+<!--OVERLAY Choco Menu: contenuti-->
+<div class="overlay overlay-scale" id="choco">
+  <button type="button" class="overlay-close"></button>
+  <div class="overlay-container-text">
+    <div class="overlay-content">
+      <h1>Choco Menu</h1>
+      <div class="table-container">
+        <table class="overlay-tab" id="table-1">
+          <tr>
+            <td> Choco salt</td>
+            <td> € 4.00</td>
+          </tr>
+          <tr>
+            <td> Choco rose</td>
+            <td> € 4.50</td>
+          </tr>
+          <tr>
+            <td> Choco vanilla</td>
+            <td> € 3.00</td>
+          </tr>
+          <tr>
+            <td> Choco pepper</td>
+            <td> € 2.00</td>
+          </tr>
+          <tr>
+            <td> Choco mou</td>
+            <td> € 3.40</td>
+          </tr>
+        </table>
+        <table class="overlay-tab" id="table-2">
+          <tr>
+            <td> Choco 
+              PARMIGIANO</td>
+            <td> € 4.00</td>
+          </tr>
+          <tr>
+            <td> Choco PAPRIKA</td>
+            <td> € 4.50</td>
+          </tr>
+          <tr>
+            <td> Choco CARDAMOMO</td>
+            <td> € 3.00</td>
+          </tr>
+          <tr>
+            <td> Choco MENTA</td>
+            <td> € 2.00</td>
+          </tr>
+          <tr>
+            <td> Choco LIQUIRIZIA</td>
+            <td> € 4.00</td>
+          </tr>
+        </table>
+        <table class="overlay-tab" id="table-3">
+          <tr>
+            <td> Choco PERE</td>
+            <td> € 4.50</td>
+          </tr>
+          <tr>
+            <td> Choco BACON</td>
+            <td> € 3.00</td>
+          </tr>
+          <tr>
+            <td> Choco BIRRA</td>
+            <td> € 2.00</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="overlay-photo"> <img src="immagini/chocomenu.jpg" width="1000" height="auto" alt=""/> </div>
+  </div>
+</div>
+<!--fine OVERLAY Choco Menu:--> 
+<!--OVERLAY Coffee Menu: contenuti-->
+<div class="overlay overlay-scale" id="coffee">
+  <button type="button" class="overlay-close"></button>
+  <div class="overlay-container-text">
+    <div class="overlay-content">
+      <h1>Coffee Menu</h1>
+      <table class="overlay-tab" id="table-4">
+        <tr>
+          <td> Excelsa coffee</td>
+          <td> € 4.50</td>
+        </tr>
+        <tr>
+          <td> Arabica coffee</td>
+          <td> € 3.00</td>
+        </tr>
+        <tr>
+          <td> Robusta coffee</td>
+          <td> € 2.00</td>
+        </tr>
+        <tr>
+          <td> deca coffee</td>
+          <td> € 4.00</td>
+        </tr>
+      </table>
+    </div>
+    <div class="overlay-photo"> <img src="immagini/coffeemenu.jpg" width="1500" height="1000" alt=""/> </div>
+  </div>
+</div>
+<!--fine OVERLAY Coffee Menu:--> 
+<!--OVERLAY Espresso Menu: contenuti-->
+<div class="overlay overlay-scale" id="espresso">
+  <button type="button" class="overlay-close"></button>
+  <div class="overlay-container-text">
+    <div class="overlay-content">
+      <h1>Espresso Menu</h1>
+      <div class="table-container">
+        <table class="overlay-tab" id="table-1">
+          <tr>
+            <td> Espresso</td>
+            <td> € 1.00</td>
+          </tr>
+          <tr>
+            <td> Double Espresso</td>
+            <td> € 1.50</td>
+          </tr>
+          <tr>
+            <td> Triple Espresso</td>
+            <td> € 2.00</td>
+          </tr>
+          <tr>
+            <td> Cappuccino</td>
+            <td> € 2.00</td>
+          </tr>
+          <tr>
+            <td> Mocha</td>
+            <td> € 3.40</td>
+          </tr>
+        </table>
+        <table class="overlay-tab" id="table-2">
+          <tr>
+            <td> Latte</td>
+            <td> € 4.00</td>
+          </tr>
+          <tr>
+            <td> Macchiato</td>
+            <td> € 4.50</td>
+          </tr>
+          <tr>
+            <td> Caramel Brulèe</td>
+            <td> € 3.00</td>
+          </tr>
+          <tr>
+            <td> Frappuccino</td>
+            <td> € 2.00</td>
+          </tr>
+          <tr>
+            <td> Iced Coffee</td>
+            <td> € 4.00</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="overlay-photo"> <img src="immagini/espressomenu.jpg" width="1000" height="auto" alt=""/> </div>
+  </div>
+</div>
+<!--fine OVERLAY Espresso Menu:--> 
+<script src="js/overlay.js"></script> <!--Effetto overlay per le pagine-->
+<!--<div id="test-width"></div>
+--></body>
+</html>
